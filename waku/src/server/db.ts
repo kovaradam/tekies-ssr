@@ -11,17 +11,17 @@ export class DB {
   static readonly #posts: Post[] = [];
 
   static readonly getPosts = async () => {
-    delay();
+    await delay();
     return this.#posts;
   };
 
   static readonly getPost = async (slug: string) => {
-    delay();
+    await delay();
     return this.#posts.find((post) => post.slug === slug);
   };
 
   static readonly addPost = async (post: Omit<Post, "date" | "slug">) => {
-    delay();
+    await delay();
     this.#posts.push({
       ...post,
       date: new Date(),

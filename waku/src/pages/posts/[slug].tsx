@@ -16,7 +16,8 @@ export default async function Post({ slug }: Readonly<{ slug: string }>) {
   return (
     <div>
       <Title>{post.title}</Title>
-      <hr></hr>
+      <time>{post.date.toDateString()}</time>
+      <hr className="mb-4"></hr>
       <div dangerouslySetInnerHTML={{ __html: md.render(post.content) }}></div>
     </div>
   );
