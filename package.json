@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "waku:dev": "npm run dev --prefix waku"
+  }
+}

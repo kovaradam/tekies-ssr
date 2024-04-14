@@ -9,12 +9,14 @@
     "start": "waku start"
   },
   "dependencies": {
+    "markdown-it": "^14.1.0",
     "react": "18.3.0-canary-670811593-20240322",
     "react-dom": "18.3.0-canary-670811593-20240322",
     "react-server-dom-webpack": "18.3.0-canary-670811593-20240322",
     "waku": "0.20.0"
   },
   "devDependencies": {
+    "@types/markdown-it": "^14.0.1",
     "@types/react": "18.2.69",
     "@types/react-dom": "18.2.22",
     "autoprefixer": "10.4.19",

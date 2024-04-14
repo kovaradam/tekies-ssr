@@ -1,28 +1,37 @@
-import { Link } from 'waku';
-
-import { Counter } from '../components/counter.js';
+import React from "react";
+import { DB } from "../server/db.js";
+import { Link } from "waku";
+import { Title } from "../components/Ttitle.js";
 
 export default async function HomePage() {
   const data = await getData();
 
   return (
-    <div>
-      <title>{data.title}</title>
-      <h1 className="text-4xl font-bold tracking-tight">{data.headline}</h1>
-      <p>{data.body}</p>
-      <Counter />
-      <Link to="/about" className="mt-4 inline-block underline">
-        About page
-      </Link>
+    <div className="">
+      <Title className="">{data.headline}</Title>
+      <ul>
+        {data.posts.map((post) => (
+          <React.Fragment key={post.slug}>
+            <li className="flex flex-col">
+              <Link to={"/posts/".concat(post.slug)}>
+                <h3 className="text-2xl font-bold">{post.title}</h3>
+                <time>{post.date.toDateString()}</time>
+                <p>{post.description}</p>
+              </Link>
+            </li>
+            <hr className="my-2 last-of-type:hidden" />
+          </React.Fragment>
+        ))}
+      </ul>
     </div>
   );
 }
 
 const getData = async () => {
   const data = {
-    title: 'Waku',
-    headline: 'Waku',
-    body: 'Hello world!',
+    title: "Waku",
+    headline: "Waku blog",
+    posts: await DB.getPosts(),
   };
 
   return data;
@@ -30,6 +39,6 @@ const getData = async () => {
 
 export const getConfig = async () => {
   return {
-    render: 'static',
+    render: "static",
   };
 };
