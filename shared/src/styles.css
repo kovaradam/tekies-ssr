@@ -3,6 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply bg-slate-50;
+}
+
 button {
   @apply p-2 bg-purple-700 text-orange-200 font-bold items-center disabled:bg-purple-400;
 }
@@ -12,6 +16,10 @@ header {
   h2 {
     @apply text-lg font-bold tracking-tight;
   }
+}
+
+footer {
+  @apply p-6 bottom-0 lg:left-0 border-t-2 w-full;
 }
 
 .md {

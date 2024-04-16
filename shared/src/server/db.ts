@@ -8,28 +8,27 @@ type Post = {
 };
 
 export class DB {
-  static readonly #posts: Post[] = [];
+  static readonly posts: Post[] = [];
 
   static readonly getPosts = async () => {
     await delay();
-    return this.#posts;
+    return this.posts;
   };
 
   static readonly getPost = async (slug: string) => {
     await delay();
-    return this.#posts.find((post) => post.slug === slug);
+    return this.posts.find((post) => post.slug === slug);
   };
 
   static readonly addPost = async (post: Omit<Post, "date" | "slug">) => {
-    debugger;
     await delay();
     const newPost = {
       ...post,
       date: new Date(),
       slug: slugify(post.title),
     };
-    this.#posts.push(newPost);
-    console.log(this.#posts);
+    this.posts.push(newPost);
+    console.log(this.posts);
 
     return newPost;
   };

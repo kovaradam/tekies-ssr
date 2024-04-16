@@ -17,6 +17,7 @@ export default async function RootLayout({
       <meta property="description" content={data.description} />
       <link rel="icon" type="image/png" href={data.icon} />
       <Header />
+
       <main className="m-6 flex-1">{children}</main>
       <Footer />
     </div>

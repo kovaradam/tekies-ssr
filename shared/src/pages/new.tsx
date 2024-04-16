@@ -1,6 +1,6 @@
 "use client";
 import markdownit from "markdown-it";
-import { Title } from "../components/Ttitle.js";
+import { Title } from "../components/ttitle.js";
 import React from "react";
 import { DB } from "../server/db.js";
 import { useFormState } from "react-dom";
