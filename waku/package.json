@@ -13,6 +13,7 @@
     "react": "18.3.0-canary-670811593-20240322",
     "react-dom": "18.3.0-canary-670811593-20240322",
     "react-server-dom-webpack": "18.3.0-canary-670811593-20240322",
+    "shared": "file:../shared",
     "waku": "0.20.0"
   },
   "devDependencies": {

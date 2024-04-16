@@ -1,12 +1,7 @@
 "use client";
-import markdownit from "markdown-it";
-import { Title } from "../components/Ttitle.js";
 import React from "react";
-import { DB } from "../server/db.js";
 import { useFormState } from "react-dom";
-import { Submit } from "../components/submit.js";
-
-const md = markdownit();
+import { MD, Submit, Title, addPost } from "shared";
 
 async function createPost(prev: any, formData: FormData) {
   "use server"; // Add 'use server' at the top of an async function body to mark the function as callable by the client. We call these functions Server Actions.
@@ -33,9 +28,8 @@ async function createPost(prev: any, formData: FormData) {
     );
   }
 
-  return await DB.addPost(values);
+  return await addPost(values);
 }
-console.log(useFormState);
 
 export default function NewPost() {
   const [content, setContent] = React.useState("");
@@ -87,10 +81,7 @@ export default function NewPost() {
         <section className="flex-1">
           <Title>{title}</Title>
           <hr className="mb-4"></hr>
-          <div
-            dangerouslySetInnerHTML={{ __html: md.render(content) }}
-            className="md"
-          />
+          <MD>{content}</MD>
         </section>
       </div>
     </form>

@@ -1,5 +1,6 @@
 {
   "scripts": {
-    "waku:dev": "npm run dev --prefix waku"
+    "waku:dev": "npm run dev --prefix waku",
+    "next:dev": "npm run dev --prefix next"
   }
 }

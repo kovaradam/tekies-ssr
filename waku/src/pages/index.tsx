@@ -1,7 +1,7 @@
 import React from "react";
 import { DB } from "../server/db.js";
 import { Link } from "waku";
-import { Title } from "../components/Ttitle.js";
+import { Title } from "shared";
 
 export default async function HomePage() {
   const data = await getData();

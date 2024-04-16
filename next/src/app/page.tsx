@@ -1,9 +1,10 @@
 import Link from "next/link";
 import React from "react";
-import { DB, Title } from "shared";
+import { Title, getPosts } from "shared";
 
 export default async function Home() {
   const data = await getData();
+
   return (
     <div className="">
       <Title className="">{data.headline}</Title>
@@ -29,7 +30,7 @@ const getData = async () => {
   const data = {
     title: "Next",
     headline: "Next blog",
-    posts: await DB.getPosts(),
+    posts: await getPosts(),
   };
 
   return data;

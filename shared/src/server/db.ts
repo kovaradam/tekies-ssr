@@ -1,3 +1,6 @@
+import { readFile, writeFile } from "node:fs/promises";
+import { fileURLToPath } from "node:url";
+
 type Post = {
   title: string;
   description: string;
@@ -8,27 +11,36 @@ type Post = {
 };
 
 export class DB {
-  static readonly posts: Post[] = [];
+  private static readonly FILE = `${fileURLToPath(import.meta.url)}.json`;
 
-  static readonly getPosts = async () => {
+  static readonly getPosts = async (): Promise<Post[]> => {
     await delay();
-    return this.posts;
+
+    try {
+      const fileString = (await readFile(DB.FILE)).toString();
+      return JSON.parse(fileString, (key, value) => {
+        if (key === "date") return new Date(value);
+        return value;
+      });
+    } catch (e) {
+      await writeFile(DB.FILE, JSON.stringify([]));
+      return [];
+    }
   };
 
   static readonly getPost = async (slug: string) => {
-    await delay();
-    return this.posts.find((post) => post.slug === slug);
+    return (await DB.getPosts()).find((post) => post.slug === slug);
   };
 
   static readonly addPost = async (post: Omit<Post, "date" | "slug">) => {
-    await delay();
     const newPost = {
       ...post,
       date: new Date(),
       slug: slugify(post.title),
     };
-    this.posts.push(newPost);
-    console.log(this.posts);
+    const posts = await this.getPosts();
+
+    await writeFile(DB.FILE, JSON.stringify(posts.concat(newPost)));
 
     return newPost;
   };
@@ -36,52 +48,6 @@ export class DB {
 
 const delay = () =>
   new Promise((r) => setTimeout(r, Math.max(500, Math.random() * 1500)));
-
-DB.addPost({
-  content: "This is a first post",
-  description: "This is a first post",
-  title: "First post",
-});
-
-DB.addPost({
-  description: "Waku readme",
-  title: "Second post",
-  content: `
-  
-  # Waku
-
-⛩️ The minimal React framework
-
-visit [waku.gg](https://waku.gg) or \`npm create waku@latest\`
-
-[![Build Status](https://img.shields.io/github/actions/workflow/status/dai-shi/waku/ci.yml?branch=main&style=flat&colorA=000000&colorB=000000)](https://github.com/pmndrs/jotai/actions?query=workflow%3ALint)
-[![Version](https://img.shields.io/npm/v/waku?style=flat&colorA=000000&colorB=000000)](https://www.npmjs.com/package/waku)
-[![Downloads](https://img.shields.io/npm/dt/waku.svg?style=flat&colorA=000000&colorB=000000)](https://www.npmjs.com/package/waku)
-[![Discord Shield](https://img.shields.io/discord/627656437971288081?style=flat&colorA=000000&colorB=000000&label=discord&logo=discord&logoColor=ffffff)](https://discord.gg/MrQdmzd)
-
-<br>
-
-## Introduction
-
-**Waku** _(wah-ku)_ or **わく** means “framework” in Japanese. As the minimal React framework, it’s designed to accelerate the work of developers at startups and agencies building small to medium-sized React projects. These include marketing websites, light ecommerce, and web applications.
-
-We recommend other frameworks for heavy ecommerce or enterprise applications. Waku is a lightweight alternative bringing a fast developer experience to the modern React server components era. Yes, let’s make React development fast again!
-
-> Waku is in rapid development and some features are currently missing. Please try it on non-production projects and report any issues you may encounter. Expect that there will be some breaking changes on the road towards a stable v1 release. Contributors are welcome.
-
-## Getting started
-
-Start a new Waku project with the \`create\` command for your preferred package manager. It will scaffold a new project with our default [Waku starter](https://github.com/dai-shi/waku/tree/main/examples/01_template).
-
-\`\`\`
-npm create waku@latest
-\`\`\`
-
-**Node.js version requirement:** \`^20.8.0\` or \`^18.17.0\`
-
-## Rendering
-  `,
-});
 
 function slugify(text: string) {
   return text
