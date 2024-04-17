@@ -1,0 +1,14 @@
+---
+type Props = { documentTitle: string };
+---
+
+<h1 class={"text-4xl font-bold mb-4"} data-title={Astro.props.documentTitle}>
+  <slot />
+</h1>
+
+<script>
+  document.title = `Blog | ${
+    (document.querySelector("[data-title]") as any).dataset.title ??
+    document.title
+  }`;
+</script>

@@ -1,0 +1,15 @@
+---
+type Props = { href: string };
+---
+
+<a href={Astro.props.href} data-active=""><slot /> </a>
+
+<script>
+  const activeLink = document.querySelector(
+    `[href="${document.location.pathname}"]`
+  ) as HTMLElement;
+
+  if (activeLink) {
+    activeLink.dataset.active = String(true);
+  }
+</script>
