@@ -3,11 +3,15 @@
 @tailwind utilities;
 
 body {
-  @apply bg-slate-50;
+  @apply bg-slate-100;
 }
 
 button {
   @apply p-2 bg-purple-700 text-orange-200 font-bold items-center disabled:bg-purple-400;
+}
+
+a {
+  @apply data-[active=true]:underline;
 }
 
 header {
@@ -23,6 +27,23 @@ footer {
 
 fieldset {
   @apply flex flex-col gap-1;
+}
+
+input,
+textarea {
+  @apply p-2 border rounded;
+}
+
+.post-link {
+  @apply flex flex-col;
+
+  h3 {
+    @apply text-2xl font-bold;
+  }
+
+  &:last-child hr {
+    @apply hidden;
+  }
 }
 
 .md {

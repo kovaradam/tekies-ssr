@@ -18,7 +18,7 @@ export default function NewPost() {
   return (
     <form action={action} className="w-full">
       <div className="flex justify-between">
-        <Title>New post</Title>
+        <Title documentTitle="New post">New post</Title>
         <Submit className="mb-4" />
       </div>
 
@@ -66,7 +66,7 @@ export default function NewPost() {
         </section>
 
         <section className="flex-1">
-          <Title>{title}</Title>
+          <Title documentTitle={title || "New post"}>{title}</Title>
           <hr className="mb-4"></hr>
           <MD>{content}</MD>
         </section>

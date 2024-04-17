@@ -12,7 +12,7 @@ export default async function Post({
 
   return (
     <div>
-      <Title>{post.title}</Title>
+      <Title documentTitle={post.title}>{post.title}</Title>
       <time>{post.date.toDateString()}</time>
       <hr className="mb-4"></hr>
       <MD>{post.content}</MD>

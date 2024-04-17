@@ -6,20 +6,18 @@ export default async function Home() {
   const data = await getData();
 
   return (
-    <div className="">
-      <Title className="">{data.headline}</Title>
+    <div>
+      <Title documentTitle={data.headline}>{data.headline}</Title>
       <ul>
         {data.posts.map((post) => (
-          <React.Fragment key={post.slug}>
-            <li className="flex flex-col">
-              <Link href={"/posts/".concat(post.slug)}>
-                <h3 className="text-2xl font-bold">{post.title}</h3>
-                <time>{post.date.toDateString()}</time>
-                <p>{post.description}</p>
-              </Link>
-            </li>
-            <hr className="my-2 last-of-type:hidden" />
-          </React.Fragment>
+          <li className="post-link" key={post.slug}>
+            <Link href={"/posts/".concat(post.slug)}>
+              <h3>{post.title}</h3>
+              <time>{post.date.toDateString()}</time>
+              <p>{post.description}</p>
+            </Link>
+            <hr className="my-2" />
+          </li>
         ))}
       </ul>
     </div>
@@ -28,8 +26,7 @@ export default async function Home() {
 
 const getData = async () => {
   const data = {
-    title: "Next",
-    headline: "Next blog",
+    headline: "Read this",
     posts: await getPosts(),
   };
 
