@@ -18,6 +18,10 @@ const posts = await getPosts();
               <time>{post.date.toDateString()}</time>
               <p>{post.description}</p>
             </a>
+            <form method="post" action="/api/delete">
+              <button>Delete</button>
+              <input type="hidden" name="slug" value={post.slug} />
+            </form>
             <hr />
           </li>
         ))

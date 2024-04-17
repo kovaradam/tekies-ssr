@@ -1,5 +1,4 @@
-import { Title } from "../../components/Ttitle.js";
-import { MD } from "../../components/md.js";
+import { PostPage } from "shared";
 import { DB } from "../../server/db.js";
 import NotFound from "../[...catchAll].js";
 
@@ -10,12 +9,5 @@ export default async function Post({ slug }: Readonly<{ slug: string }>) {
     return <NotFound />;
   }
 
-  return (
-    <div>
-      <Title>{post.title}</Title>
-      <time>{post.date.toDateString()}</time>
-      <hr className="mb-4"></hr>
-      <MD>{post.content}</MD>
-    </div>
-  );
+  return <PostPage post={post} />;
 }

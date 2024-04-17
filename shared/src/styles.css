@@ -3,15 +3,23 @@
 @tailwind utilities;
 
 body {
-  @apply bg-slate-100;
+  @apply bg-slate-100 min-h-screen flex flex-col;
 }
 
-button {
-  @apply p-2 bg-purple-700 text-orange-200 font-bold items-center disabled:bg-purple-400;
+main {
+  @apply m-6 flex-1;
+}
+
+button.primary {
+  @apply flex p-2 bg-purple-700 text-orange-200 font-bold items-center disabled:bg-purple-400 rounded justify-center;
+}
+
+button[type="submit"] {
+  @apply w-[20ch];
 }
 
 a {
-  @apply data-[active=true]:underline;
+  @apply data-[active=true]:underline hover:bg-slate-200;
 }
 
 header {
@@ -23,6 +31,10 @@ header {
 
 footer {
   @apply p-6 bottom-0 lg:left-0 border-t-2 w-full;
+
+  a {
+    @apply mt-4 inline-block underline;
+  }
 }
 
 fieldset {
@@ -39,6 +51,10 @@ textarea {
 
   h3 {
     @apply text-2xl font-bold;
+  }
+
+  hr {
+    @apply my-2;
   }
 
   &:last-child hr {

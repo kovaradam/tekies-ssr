@@ -8,9 +8,7 @@ export function Submit(props: Readonly<React.HTMLProps<HTMLButtonElement>>) {
   return (
     <button
       {...props}
-      className={"w-[20ch] bg-purple-400 rounded text-yellow-100 font-bold flex justify-center ".concat(
-        props.className ?? ""
-      )}
+      className={"primary ".concat(props.className ?? "")}
       disabled={status.pending || props.disabled}
       type="submit"
     >

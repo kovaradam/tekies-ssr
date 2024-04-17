@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { useFormState } from "react-dom";
-import { MD, Submit, Title, addPost } from "shared";
+import { Markdown, Submit, Title, addPost } from "shared";
 
 async function createPost(prev: any, formData: FormData) {
   "use server"; // Add 'use server' at the top of an async function body to mark the function as callable by the client. We call these functions Server Actions.
@@ -43,7 +43,7 @@ export default function NewPost() {
   return (
     <form id={formId} action={action} className="w-full">
       <div className="flex justify-between">
-        <Title>New post</Title>
+        <Title documentTitle={"New post"}>New post</Title>
         <Submit />
       </div>
 
@@ -79,9 +79,9 @@ export default function NewPost() {
         </section>
 
         <section className="flex-1">
-          <Title>{title}</Title>
+          <Title documentTitle={title}>{title}</Title>
           <hr className="mb-4"></hr>
-          <MD>{content}</MD>
+          <Markdown content={content} />
         </section>
       </div>
     </form>

@@ -1,0 +1,23 @@
+---
+import { getPost } from "../../../../shared/src/server/service";
+import { PostPage } from "shared/src/components/post";
+import Layout from "../../layouts/Layout.astro";
+
+const { slug } = Astro.params;
+
+const post = await getPost(slug as string);
+---
+
+<Layout>
+  {
+    post ? (
+      <PostPage post={post} />
+    ) : (
+      <div class="flex flex-col items-center justify-center gap-5 h-[70vh]">
+        <div class="max-w-[60ch]">
+          <img alt="" src="/clumsy.svg" />
+        </div>
+      </div>
+    )
+  }
+</Layout>

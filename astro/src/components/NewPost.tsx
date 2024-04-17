@@ -1,25 +1,23 @@
-"use client";
-import { createPostAction } from "@/service";
 import React from "react";
-import { useFormState } from "react-dom";
-import { Markdown, Submit, Title } from "shared";
+import { Markdown } from "shared/src/components/md";
+import { Title } from "shared/src/components/title";
 
-const initErrors = {
-  content: "",
-  title: "",
-  description: "",
-};
-
-export default function NewPostPage() {
+export function NewPost(
+  props: Readonly<{
+    errors: Record<string, string>;
+    defaultValues: Record<string, string>;
+  }>
+) {
   const [title, setTitle] = React.useState("");
   const [content, setContent] = React.useState("");
-  const [errors, action] = useFormState(createPostAction, initErrors);
 
   return (
-    <form action={action} className="w-full">
+    <form action={""} method="post" className="w-full">
       <div className="flex justify-between">
         <Title documentTitle="New post">New post</Title>
-        <Submit className="mb-4" />
+        <button type="submit" className="mb-4 primary">
+          Create!
+        </button>
       </div>
 
       <hr className="mb-4"></hr>
@@ -48,6 +46,7 @@ export default function NewPostPage() {
               <label htmlFor={field.name}>{field.label}</label>
               {field.name === "content" ? (
                 <textarea
+                  defaultValue={props.defaultValues[field.name]}
                   id={field.name}
                   name={field.name}
                   onChange={field.onChange}
@@ -55,12 +54,13 @@ export default function NewPostPage() {
                 />
               ) : (
                 <input
+                  defaultValue={props.defaultValues[field.name]}
                   id={field.name}
                   name={field.name}
                   onChange={field.onChange}
                 />
               )}
-              <i className="text-red-500">{errors[field.name]}</i>
+              <i className="text-red-500">{props.errors?.[field.name]}</i>
             </fieldset>
           ))}
         </section>

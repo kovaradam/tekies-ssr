@@ -2,10 +2,10 @@ import markdownit from "markdown-it";
 
 const md = markdownit();
 
-export function MD(props: Readonly<{ children: string }>) {
+export function Markdown(props: Readonly<{ content: string }>) {
   return (
     <div
-      dangerouslySetInnerHTML={{ __html: md.render(props.children) }}
+      dangerouslySetInnerHTML={{ __html: md.render(props.content) }}
       className="md"
     />
   );

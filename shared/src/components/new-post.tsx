@@ -1,8 +1,7 @@
-"use client";
-import { createPostAction } from "@/service";
 import React from "react";
-import { useFormState } from "react-dom";
-import { Markdown, Submit, Title } from "shared";
+import { Title } from "./title";
+import { Submit } from "./submit";
+import { Markdown } from "./md";
 
 const initErrors = {
   content: "",
@@ -10,13 +9,11 @@ const initErrors = {
   description: "",
 };
 
-export default function NewPostPage() {
+export function NewPost() {
   const [title, setTitle] = React.useState("");
   const [content, setContent] = React.useState("");
-  const [errors, action] = useFormState(createPostAction, initErrors);
-
   return (
-    <form action={action} className="w-full">
+    <>
       <div className="flex justify-between">
         <Title documentTitle="New post">New post</Title>
         <Submit className="mb-4" />
@@ -71,6 +68,6 @@ export default function NewPostPage() {
           <Markdown content={content} />
         </section>
       </div>
-    </form>
+    </>
   );
 }

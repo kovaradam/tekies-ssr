@@ -1,7 +1,7 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 
-type Post = {
+export type Post = {
   title: string;
   description: string;
   content: string;
@@ -43,6 +43,15 @@ export class DB {
     await writeFile(DB.FILE, JSON.stringify(posts.concat(newPost)));
 
     return newPost;
+  };
+
+  static readonly deletePost = async (slug: string) => {
+    const posts = await this.getPosts();
+
+    await writeFile(
+      DB.FILE,
+      JSON.stringify(posts.filter((post) => post.slug !== slug))
+    );
   };
 }
 

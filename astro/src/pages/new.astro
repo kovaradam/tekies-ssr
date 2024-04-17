@@ -1,0 +1,28 @@
+---
+import { handlePostForm } from "shared/src/server/service";
+import { NewPost } from "../components/NewPost";
+import Layout from "../layouts/Layout.astro";
+
+let errors = {};
+let defaultValues = {};
+
+if (Astro.request.method === "POST") {
+  try {
+    const formData = await Astro.request.formData();
+    errors = await handlePostForm(formData);
+    if (!errors) {
+      return Astro.redirect("/");
+    }
+
+    defaultValues = Object.fromEntries(formData.entries());
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message);
+    }
+  }
+}
+---
+
+<Layout>
+  <NewPost client:load errors={errors} defaultValues={defaultValues} />
+</Layout>

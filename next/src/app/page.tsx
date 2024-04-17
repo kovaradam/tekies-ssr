@@ -1,3 +1,4 @@
+import { deletePostAction } from "@/service";
 import Link from "next/link";
 import React from "react";
 import { Title, getPosts } from "shared";
@@ -16,6 +17,10 @@ export default async function Home() {
               <time>{post.date.toDateString()}</time>
               <p>{post.description}</p>
             </Link>
+            <form action={deletePostAction}>
+              <button>Delete</button>
+              <input type="hidden" name="slug" value={post.slug} />
+            </form>
             <hr className="my-2" />
           </li>
         ))}
@@ -26,7 +31,7 @@ export default async function Home() {
 
 const getData = async () => {
   const data = {
-    headline: "Read this",
+    headline: "Read this 🔺",
     posts: await getPosts(),
   };
 
