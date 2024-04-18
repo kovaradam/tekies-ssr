@@ -3,6 +3,7 @@
     "waku:dev": "npm run dev --prefix waku",
     "next:dev": "npm run dev --prefix next",
     "vite:dev": "npm run dev --prefix vite-ssr",
-    "astro:dev": "npm run dev --prefix astro"
+    "astro:dev": "npm run dev --prefix astro",
+    "remix:dev": "npm run dev --prefix remix"
   }
 }

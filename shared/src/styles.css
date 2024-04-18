@@ -19,7 +19,16 @@ button[type="submit"] {
 }
 
 a {
-  @apply data-[active=true]:underline hover:bg-slate-200;
+  @apply hover:bg-slate-200;
+}
+
+.not-found {
+  @apply flex flex-col items-center justify-center gap-5 h-full;
+}
+
+a[data-active="true"],
+a[aria-current="page"] {
+  @apply underline;
 }
 
 header {
